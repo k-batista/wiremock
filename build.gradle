@@ -1,0 +1,49 @@
+plugins {
+    id 'groovy'
+    id 'java'
+    id 'application'
+}
+mainClassName = "br.com.wiremock.WiremockApplication"
+
+group = "br.com.wiremock"
+version = "0.0.1-SNAPSHOT"
+
+repositories {
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'com.github.tomakehurst:wiremock-jre8:2.29.1'
+    implementation 'org.slf4j:slf4j-log4j12:1.7.29'
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.11.342'
+
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'br.com.wiremock.WiremockApplication',
+        )
+    }
+}
+
+task fatJar(type: Jar) {
+    manifest.from jar.manifest
+    classifier = 'all'
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+    with jar
+}
+
+artifacts {
+    archives fatJar
+}
+
+test {
+    useJUnitPlatform()
+}

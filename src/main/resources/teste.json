@@ -1,0 +1,29 @@
+{
+  "request": {
+    "urlPathPattern": "/rest/public/profile/idtPerson/([0-9]*)",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "codProfile":"{{randomValue length=12 type='ALPHANUMERIC'}}",
+      "numAvatarVersion":"0",
+      "indNamLoginVisibility":"0",
+      "namNick":"z46f55e749li",
+      "desUrlProfile":"z46f55e749li",
+      "numNetworkFriends":"0",
+      "indUserProfile":"V",
+      "indStatus":"A",
+      "flgPublicProfile":1,
+      "namNickUnique":"votorantim-z46f55e749li",
+      "flgDefaultImage":1,
+      "flgHotContent":"1",
+      "desDailyQuote":"",
+      "indModerationStatus":"N"
+    },
+    "transformers": ["response-template"]
+  }
+}
